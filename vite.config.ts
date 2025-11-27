@@ -19,41 +19,32 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          // React vendor chunk
-          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/react-router')) {
-            return 'react-vendor';
-          }
-          // GSAP chunk
-          if (id.includes('node_modules/gsap')) {
-            return 'gsap';
-          }
-          // EmailJS chunk
-          if (id.includes('node_modules/@emailjs')) {
-            return 'emailjs';
-          }
-          // Radix UI components
-          if (id.includes('node_modules/@radix-ui')) {
-            return 'radix-ui';
-          }
-          // Lucide icons
-          if (id.includes('node_modules/lucide-react')) {
-            return 'lucide-icons';
-          }
-          // Other large dependencies
+          // React должен быть в основном vendor чанке, не отдельно
           if (id.includes('node_modules')) {
+            // GSAP chunk
+            if (id.includes('gsap')) {
+              return 'gsap';
+            }
+            // EmailJS chunk
+            if (id.includes('@emailjs')) {
+              return 'emailjs';
+            }
+            // Radix UI components
+            if (id.includes('@radix-ui')) {
+              return 'radix-ui';
+            }
+            // Lucide icons
+            if (id.includes('lucide-react')) {
+              return 'lucide-icons';
+            }
+            // Все остальное включая React в один vendor
             return 'vendor';
           }
         },
       },
     },
     chunkSizeWarningLimit: 1000,
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
+    minify: 'esbuild',
     sourcemap: false,
     cssCodeSplit: true,
     target: 'esnext',
