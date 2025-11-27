@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 220 40% 5%;
+    --foreground: 180 100% 90%;
+
+    --card: 220 35% 8%;
+    --card-foreground: 180 100% 90%;
+
+    --popover: 220 35% 8%;
+    --popover-foreground: 180 100% 90%;
+
+    --primary: 180 100% 50%;
+    --primary-foreground: 220 40% 5%;
+
+    --secondary: 320 100% 60%;
+    --secondary-foreground: 220 40% 5%;
+
+    --muted: 220 25% 15%;
+    --muted-foreground: 180 30% 60%;
+
+    --accent: 280 100% 70%;
+    --accent-foreground: 220 40% 5%;
+
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 30% 20%;
+    --input: 220 30% 15%;
+    --ring: 180 100% 50%;
+
+    --radius: 0.5rem;
+    
+    /* Cyberpunk specific tokens */
+    --neon-cyan: 180 100% 50%;
+    --neon-magenta: 320 100% 60%;
+    --neon-purple: 280 100% 70%;
+    --cyber-dark: 220 40% 5%;
+    --cyber-darker: 220 45% 3%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(180 100% 50%), hsl(280 100% 70%));
+    --gradient-secondary: linear-gradient(135deg, hsl(320 100% 60%), hsl(280 100% 70%));
+    --gradient-cyber: linear-gradient(180deg, hsl(220 40% 5%), hsl(220 45% 3%));
+    
+    /* Glows */
+    --glow-cyan: 0 0 20px hsl(180 100% 50% / 0.5), 0 0 40px hsl(180 100% 50% / 0.3);
+    --glow-magenta: 0 0 20px hsl(320 100% 60% / 0.5), 0 0 40px hsl(320 100% 60% / 0.3);
+    
+    /* Animation */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Keep same theme for dark mode */
+    --background: 220 40% 5%;
+    --foreground: 180 100% 90%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Rajdhani', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-gradient-primary {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-gradient-secondary {
+    background: var(--gradient-secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .glow-cyan {
+    text-shadow: var(--glow-cyan);
+  }
+  
+  .glow-magenta {
+    text-shadow: var(--glow-magenta);
+  }
+  
+  .bg-gradient-cyber {
+    background: var(--gradient-cyber);
+  }
+  
+  .cyber-grid {
+    background-image: 
+      linear-gradient(hsla(180 100% 50% / 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, hsla(180 100% 50% / 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 10px hsl(var(--primary) / 0.5), 0 0 20px hsl(var(--primary) / 0.3);
+    }
+    to {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.8), 0 0 40px hsl(var(--primary) / 0.5);
+    }
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  /* Hide Spline watermark */
+  spline-viewer {
+    --logo-display: none !important;
+  }
+  
+  spline-viewer::part(logo) {
+    display: none !important;
+  }
+}
